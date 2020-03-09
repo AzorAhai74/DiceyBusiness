@@ -13,6 +13,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
     let count = 1;
 
+    let countMaxLimit = 11;
+
     button1.addEventListener('click', function() {
         
         document.body.appendChild(div);
@@ -45,8 +47,16 @@ window.addEventListener('DOMContentLoaded', function() {
         divSquare.style.verticalAlign = 'middle';
         divSquare.style.lineHeight = '1.5';
         
+        function countClick() {
+            if (count === countMaxLimit) {
+            document.getElementById('genDieBtn').disabled = 'disabled';
+            }
+        };
 
         count++;
+
+        countClick();
+        
 
 
 
