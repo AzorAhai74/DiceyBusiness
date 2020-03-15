@@ -1,7 +1,6 @@
 window.addEventListener('DOMContentLoaded', function() {
-    const button1 = document.getElementById('genDieBtn');
-    const button2 = document.getElementById('reRollDie');
 
+    
     
 
     let div = document.createElement('div');
@@ -17,58 +16,95 @@ window.addEventListener('DOMContentLoaded', function() {
     div.style.boxShadow = '10px 10px grey';
 
     
-    button1.addEventListener('click', function() {
-
-        function createDie() {
-            
-            
-            let count = Math.floor((Math.random() * 10) + 1);
-
-            
-
-            let divSquare = document.createElement('div');
-            let divSquareText = document.createTextNode(count);
-            div.className = 'genDie';
-            let divSquare1 = document.getElementsByClassName('genDie');
-            divSquare.class = divSquare1;
-            divSquare.id = count;
     
-            divSquare.appendChild(divSquareText);
-            div.appendChild(divSquare);
-            divSquare.style.height = '50px';
-            divSquare.style.width = '50px';
-            divSquare.style.border = '2px solid black';
-            divSquare.style.borderRadius = '8px';
-            divSquare.style.margin = '25px 10px 15px';
-            divSquare.style.cssFloat = 'left';
-            divSquare.style.fontSize = '30px';
-            divSquare.style.verticalAlign = 'middle';
-            divSquare.style.lineHeight = '1.5';
+
+    function createDie() {
+        
 
             
+        let count = Math.floor((Math.random() * 10) + 1);
+        let countMaxLimit = 5;
+            
+
+        let divSquare = document.createElement('div');
+        let divSquareText = document.createTextNode(count);
+        div.className = 'genDie';
+        let divSquare1 = document.getElementsByClassName('genDie');
+        divSquare.class = divSquare1;
+        divSquare.id = count;
 
             
-        };
+        divSquare.setAttribute("id", "eachDie");
+        divSquare.appendChild(divSquareText);
+        div.appendChild(divSquare);
+        divSquare.style.height = '50px';
+        divSquare.style.width = '50px';
+        divSquare.style.border = '2px solid black';
+        divSquare.style.borderRadius = '8px';
+        divSquare.style.margin = '25px 10px 15px';
+        divSquare.style.cssFloat = 'left';
+        divSquare.style.fontSize = '30px';
+        divSquare.style.verticalAlign = 'middle';
+        divSquare.style.lineHeight = '1.5';
 
         function stopDie() {
-            if (count = Math.floor((Math.random() * 10) + 1)) {
-                document.getElementById('genDieBtn').disabled = 'disabled';
-            };
+            if (count = countMaxLimit) {
+            document.getElementById('genDieBtn').disabled = 'disabled';
+            }
         };
+
         
         
-        
-        createDie();
-        createDie();
-        createDie();
-        createDie();
-        createDie();
         stopDie();
+
+    };
+
+    
+
+    document.getElementById('genDieBtn').addEventListener('click', function() {
+        createDie();
+        createDie();
+        createDie();
+        createDie();
+        createDie();
+        function reRollDie() {
+            document.getElementById('reRollDie').addEventListener('click', function() {
+            createDie();
+            createDie();
+            createDie();
+            createDie();
+            createDie();
+            });
+        };
+        reRollDie();
+    });
+
+    
+    
+    
+
+    
+
+    
+
+
+    
+
+   
+    
+    
+
+
+    
         
 
-
-
-    });
+        
+        
+        
+        
+    
+    
+    
     
 
     
