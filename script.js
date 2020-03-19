@@ -53,9 +53,17 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        
-        
         stopDie();
+
+        function replaceDie() {
+            divSquare.removeChild(divSquareText);
+            reRollDie();
+        };
+
+        document.getElementById('reRollDie').addEventListener('click', function() {
+            replaceDie();
+            replaceDie();
+        });
 
     };
 
@@ -67,17 +75,33 @@ window.addEventListener('DOMContentLoaded', function() {
         createDie();
         createDie();
         createDie();
-        function reRollDie() {
-            document.getElementById('reRollDie').addEventListener('click', function() {
-            createDie();
-            createDie();
-            createDie();
-            createDie();
-            createDie();
-            });
-        };
-        reRollDie();
+       
     });
+
+    function reRollDie() {
+
+        let reCount = Math.floor((Math.random() * 10) + 1);
+        
+
+        let reRollId = document.getElementById('eachDie');
+        let reRollText = document.createTextNode(reCount);
+        reRollId.id = reCount;
+        
+
+        reRollId.appendChild(reRollText);
+
+        
+        
+    };
+
+    
+
+    
+
+        
+
+
+    
 
     
     
