@@ -15,17 +15,16 @@ window.addEventListener('DOMContentLoaded', function() {
     div.style.borderStyle = 'solid';
     div.style.boxShadow = '10px 10px grey';
 
+
     
+
     
 
     function createDie() {
-        
-
-            
         let count = Math.floor((Math.random() * 10) + 1);
         let countMaxLimit = 5;
-            
-
+        
+        
         let divSquare = document.createElement('div');
         let divSquareText = document.createTextNode(count);
         div.className = 'genDie';
@@ -46,28 +45,22 @@ window.addEventListener('DOMContentLoaded', function() {
         divSquare.style.fontSize = '30px';
         divSquare.style.verticalAlign = 'middle';
         divSquare.style.lineHeight = '1.5';
+        reRollDieListeners(button2);
 
-        function stopDie() {
+        function stopDieRoll() {
             if (count = countMaxLimit) {
             document.getElementById('genDieBtn').disabled = 'disabled';
             }
         };
 
-        stopDie();
+        stopDieRoll();
 
-        function replaceDie() {
-            divSquare.removeChild(divSquareText);
-            reRollDie();
-        };
-
-        document.getElementById('reRollDie').addEventListener('click', function() {
-            replaceDie();
-            replaceDie();
-        });
-
+       
+        
+       
     };
-
     
+
 
     document.getElementById('genDieBtn').addEventListener('click', function() {
         createDie();
@@ -75,34 +68,55 @@ window.addEventListener('DOMContentLoaded', function() {
         createDie();
         createDie();
         createDie();
-       
     });
 
-    function reRollDie() {
+    button2 = document.getElementById('reRollDie');
 
-        let reCount = Math.floor((Math.random() * 10) + 1);
+    function reRollDieListeners(button2) {
         
+        button2.addEventListener('click', function() {
+            div.removeChild(div.firstChild);
+        });
 
-        let reRollId = document.getElementById('eachDie');
-        let reRollText = document.createTextNode(reCount);
-        reRollId.id = reCount;
+
+
+
+        button2.addEventListener('click', function() {
+            let reCount = Math.floor((Math.random() * 10) + 1);
         
+        
+            let newDivSquare = document.createElement('div');
+            let newDivSquareText = document.createTextNode(reCount);
+            div.className = 'newGenDie';
+            let newDivSquare1 = document.getElementsByClassName('newGenDie');
+            newDivSquare.class = newDivSquare1;
+            newDivSquare.id = reCount;
 
-        reRollId.appendChild(reRollText);
-
+            
+            newDivSquare.setAttribute("id", "newEachDie");
+            newDivSquare.appendChild(newDivSquareText);
+            div.appendChild(newDivSquare);
+            newDivSquare.style.height = '50px';
+            newDivSquare.style.width = '50px';
+            newDivSquare.style.border = '2px solid black';
+            newDivSquare.style.borderRadius = '8px';
+            newDivSquare.style.margin = '25px 10px 15px';
+            newDivSquare.style.cssFloat = 'left';
+            newDivSquare.style.fontSize = '30px';
+            newDivSquare.style.verticalAlign = 'middle';
+            newDivSquare.style.lineHeight = '1.5';
+        });
         
         
     };
 
     
-
     
 
         
 
 
     
-
     
     
     
