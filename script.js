@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     
     
+    
 
     let div = document.createElement('div');
     div.className = 'col shadow-lg p-4 mb-4 bg-light';
@@ -15,8 +16,12 @@ window.addEventListener('DOMContentLoaded', function() {
     div.style.borderStyle = 'solid';
     div.style.boxShadow = '10px 10px grey';
 
-
     
+
+    const die = [];
+
+
+
 
     
 
@@ -48,6 +53,7 @@ window.addEventListener('DOMContentLoaded', function() {
         reRollDieListeners(button2);
         
 
+        
         function stopDieRoll() {
             if (count = countMaxLimit) {
             document.getElementById('genDieBtn').disabled = 'disabled';
@@ -56,6 +62,43 @@ window.addEventListener('DOMContentLoaded', function() {
 
         stopDieRoll();
 
+        
+
+        function eachDieListener() {
+            div.removeChild(div.firstChild);
+            let eachCount = Math.floor((Math.random() * 10) + 1);
+            
+            let eachDivSquare = document.createElement('div');
+            let eachDivSquareText = document.createTextNode(eachCount);
+            div.className = 'eachGenDie';
+            let eachDivSquare1 = document.getElementsByClassName('eachGenDie');
+            eachDivSquare.class = eachDivSquare1;
+            eachDivSquare.id = eachCount;
+
+            
+            eachDivSquare.setAttribute("id", "eachNewDie");
+            eachDivSquare.appendChild(eachDivSquareText);
+            div.appendChild(eachDivSquare);
+            eachDivSquare.style.height = '50px';
+            eachDivSquare.style.width = '50px';
+            eachDivSquare.style.border = '2px solid black';
+            eachDivSquare.style.borderRadius = '8px';
+            eachDivSquare.style.margin = '25px 10px 15px';
+            eachDivSquare.style.cssFloat = 'left';
+            eachDivSquare.style.fontSize = '30px';
+            eachDivSquare.style.verticalAlign = 'middle';
+            eachDivSquare.style.lineHeight = '1.5';
+        
+        };
+
+        document.getElementById('eachDie').addEventListener('click', function() {
+            for (let i = 0; i < 5;i++) {
+                die.push(eachDieListener())
+            }
+            return die;
+        })
+
+            
        
         
        
@@ -64,12 +107,14 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     document.getElementById('genDieBtn').addEventListener('click', function() {
-        createDie();
-        createDie();
-        createDie();
-        createDie();
-        createDie();
+        for (let i = 0; i < 5; i++) {
+            die.push(createDie());
+        }
+        return die;
     });
+
+    
+    
 
     let button2 = document.getElementById('reRollDie');
     
@@ -83,7 +128,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
         button2.addEventListener('click', function() {
             let reCount = Math.floor((Math.random() * 10) + 1);
-            let eachNewDieClick = document.getElementById('newEachDie');
+            
         
             let newDivSquare = document.createElement('div');
             let newDivSquareText = document.createTextNode(reCount);
@@ -107,40 +152,48 @@ window.addEventListener('DOMContentLoaded', function() {
             newDivSquare.style.verticalAlign = 'middle';
             newDivSquare.style.lineHeight = '1.5';
             
-            eachNewDieClick.addEventListener('click', function() {
-                let eachCount = Math.floor((Math.random() * 10) + 1);
-                let eachNewDieText = document.createTextNode(eachCount);
-    
-                let dieArray = [0, 1, 2, 3, 4];
-                
-                dieArray.forEach(eachDieRoll);
-    
-                function eachDieRoll() {
-                    newDivSquare.removeChild(newDivSquareText);
-                    newDivSquare.appendChild(eachNewDieText);
-                };
-                
-                eachDieRoll();
-                
-    
-                
-                
-                
-                
-            });
-
+            
+            
+            
+        
+            
         });
 
         
+        
+
+        
     };
 
     
 
-    function eachNewDieListener(eachNewDieClick) {
-        
+
+    
+    
+    
+
+    
+    
+
+
+            
+                
+    
+
         
 
-    };
+        
+    
+    
+
+    
+    
+
+
+    
+    
+    
+
     
 
     
