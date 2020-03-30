@@ -20,14 +20,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
     const die = [];
 
-
-
-
     
+
 
     function createDie() {
         let count = Math.floor((Math.random() * 10) + 1);
-        let countMaxLimit = 5;
         
         
         let divSquare = document.createElement('div');
@@ -39,6 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
             
         divSquare.setAttribute("id", "eachDie");
+        divSquare.setAttribute("class", "eachDieClass");
         divSquare.appendChild(divSquareText);
         div.appendChild(divSquare);
         divSquare.style.height = '50px';
@@ -50,6 +48,29 @@ window.addEventListener('DOMContentLoaded', function() {
         divSquare.style.fontSize = '30px';
         divSquare.style.verticalAlign = 'middle';
         divSquare.style.lineHeight = '1.5';
+        
+        let dice = document.querySelectorAll('.eachDieClass');
+
+        dice.forEach(function(eachDieClass) {
+            eachDieClass.addEventListener('click', dieClicked);
+        });
+
+    };
+
+    
+    function dieClicked(e) {
+        if (e.target.textContent === true) {
+            div.removeChild(div.firstChild);
+            return;
+        }
+        e.target.textContent = Math.floor((Math.random() * 10) + 1);
+    };
+    
+
+
+    function genDie() {
+        createDie();
+        countMaxLimit = 5;
         reRollDieListeners(button2);
         
 
@@ -66,49 +87,27 @@ window.addEventListener('DOMContentLoaded', function() {
 
         function eachDieListener() {
             div.removeChild(div.firstChild);
-            let eachCount = Math.floor((Math.random() * 10) + 1);
+            createDie();
             
-            let eachDivSquare = document.createElement('div');
-            let eachDivSquareText = document.createTextNode(eachCount);
-            div.className = 'eachGenDie';
-            let eachDivSquare1 = document.getElementsByClassName('eachGenDie');
-            eachDivSquare.class = eachDivSquare1;
-            eachDivSquare.id = eachCount;
-
             
-            eachDivSquare.setAttribute("id", "eachNewDie");
-            eachDivSquare.appendChild(eachDivSquareText);
-            div.appendChild(eachDivSquare);
-            eachDivSquare.style.height = '50px';
-            eachDivSquare.style.width = '50px';
-            eachDivSquare.style.border = '2px solid black';
-            eachDivSquare.style.borderRadius = '8px';
-            eachDivSquare.style.margin = '25px 10px 15px';
-            eachDivSquare.style.cssFloat = 'left';
-            eachDivSquare.style.fontSize = '30px';
-            eachDivSquare.style.verticalAlign = 'middle';
-            eachDivSquare.style.lineHeight = '1.5';
         
         };
 
         document.getElementById('eachDie').addEventListener('click', function() {
             for (let i = 0; i < 5;i++) {
-                die.push(eachDieListener())
+                die.push(eachDieListener());
             }
             return die;
-        })
-
             
-       
+        });
         
-       
     };
     
 
 
     document.getElementById('genDieBtn').addEventListener('click', function() {
         for (let i = 0; i < 5; i++) {
-            die.push(createDie());
+            die.push(genDie());
         }
         return die;
     });
@@ -127,42 +126,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
         button2.addEventListener('click', function() {
-            let reCount = Math.floor((Math.random() * 10) + 1);
             
+            createDie();
         
-            let newDivSquare = document.createElement('div');
-            let newDivSquareText = document.createTextNode(reCount);
-            div.className = 'newGenDie';
-            let newDivSquare1 = document.getElementsByClassName('newGenDie');
-            newDivSquare.class = newDivSquare1;
-            newDivSquare.id = reCount;
-            
-
-            
-            newDivSquare.setAttribute("id", "newEachDie");
-            newDivSquare.appendChild(newDivSquareText);
-            div.appendChild(newDivSquare);
-            newDivSquare.style.height = '50px';
-            newDivSquare.style.width = '50px';
-            newDivSquare.style.border = '2px solid black';
-            newDivSquare.style.borderRadius = '8px';
-            newDivSquare.style.margin = '25px 10px 15px';
-            newDivSquare.style.cssFloat = 'left';
-            newDivSquare.style.fontSize = '30px';
-            newDivSquare.style.verticalAlign = 'middle';
-            newDivSquare.style.lineHeight = '1.5';
-            
-            
-            
-            
-        
-            
         });
 
-        
-        
-
-        
     };
 
     
