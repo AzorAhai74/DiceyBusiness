@@ -1,9 +1,5 @@
 window.addEventListener('DOMContentLoaded', function() {
 
-    
-    
-    
-
     let div = document.createElement('div');
     div.className = 'col shadow-lg p-4 mb-4 bg-light';
     let div1 = document.getElementsByClassName('col shadow-lg p-4 mb-4 bg-light');
@@ -18,14 +14,22 @@ window.addEventListener('DOMContentLoaded', function() {
 
     
 
-    const die = [];
+    const dieArray = [
+        {die: 1},
+        {die: 2},
+        {die: 3},
+        {die: 4},
+        {die: 5}
+    ];
 
     
-
+    
+    
+    
 
     function createDie() {
-        let count = Math.floor((Math.random() * 10) + 1);
         
+        let count = Math.floor((Math.random() * 10) + 1);
         
         let divSquare = document.createElement('div');
         let divSquareText = document.createTextNode(count);
@@ -49,14 +53,26 @@ window.addEventListener('DOMContentLoaded', function() {
         divSquare.style.verticalAlign = 'middle';
         divSquare.style.lineHeight = '1.5';
         
+        
+        
+
+        
         let dice = document.querySelectorAll('.eachDieClass');
 
         dice.forEach(function(eachDieClass) {
             eachDieClass.addEventListener('click', dieClicked);
         });
 
+        dice.forEach(function(eachDieClass) {
+            eachDieClass.addEventListener('dblclick', dblClicked)
+        });
+        
+        
+
     };
 
+    
+     
     
     function dieClicked(e) {
         if (e.target.textContent === true) {
@@ -65,6 +81,16 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         e.target.textContent = Math.floor((Math.random() * 10) + 1);
     };
+
+    function dblClicked() {
+        div.removeChild(div.firstChild);
+        return;
+        
+    };
+    
+
+    
+    
     
 
 
@@ -83,22 +109,12 @@ window.addEventListener('DOMContentLoaded', function() {
 
         stopDieRoll();
 
-        
-
-        function eachDieListener() {
-            div.removeChild(div.firstChild);
-            createDie();
-            
-            
-        
-        };
-
         document.getElementById('eachDie').addEventListener('click', function() {
-            for (let i = 0; i < 5;i++) {
-                die.push(eachDieListener());
-            }
-            return die;
-            
+            dieClicked();
+        });
+
+        document.getElementById('eachDie').addEventListener('dblclick', function() {
+            dblClicked();
         });
         
     };
@@ -107,31 +123,43 @@ window.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('genDieBtn').addEventListener('click', function() {
         for (let i = 0; i < 5; i++) {
-            die.push(genDie());
+            dieArray.push(genDie());
         }
-        return die;
+        return dieArray;
+        
     });
 
     
-    
-
     let button2 = document.getElementById('reRollDie');
     
 
     function reRollDieListeners(button2) {
-        
-        button2.addEventListener('click', function() {
-            div.removeChild(div.firstChild);
-        });
-
-
         button2.addEventListener('click', function() {
             
-            createDie();
+        createDie();
         
         });
 
     };
+
+    document.getElementById('sumDie').addEventListener('click', function() {
+        let sum = dieArray.reduce(function(a, b) {
+            return a + b + dieArray.die;
+        }, 0);
+        alert('Total Die:' + sum);
+    });
+    
+    
+
+    
+    
+        
+    
+
+    
+    
+
+    
 
     
 
