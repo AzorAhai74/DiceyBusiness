@@ -14,15 +14,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
     
 
-    const dieArray = [
-        {die: 1},
-        {die: 2},
-        {die: 3},
-        {die: 4},
-        {die: 5}
-    ];
+    const dieArray = [];
 
-    
+    function die() {
+        let dieRoll = dieArray;
+
+        createDie(dieRoll);
+    };
     
     
     
@@ -31,6 +29,8 @@ window.addEventListener('DOMContentLoaded', function() {
         
         let count = Math.floor((Math.random() * 10) + 1);
         
+    
+        
         let divSquare = document.createElement('div');
         let divSquareText = document.createTextNode(count);
         div.className = 'genDie';
@@ -38,7 +38,6 @@ window.addEventListener('DOMContentLoaded', function() {
         divSquare.class = divSquare1;
         divSquare.id = count;
 
-            
         divSquare.setAttribute("id", "eachDie");
         divSquare.setAttribute("class", "eachDieClass");
         divSquare.appendChild(divSquareText);
@@ -52,10 +51,8 @@ window.addEventListener('DOMContentLoaded', function() {
         divSquare.style.fontSize = '30px';
         divSquare.style.verticalAlign = 'middle';
         divSquare.style.lineHeight = '1.5';
-        
-        
-        
 
+        divSquare.textContent = count;
         
         let dice = document.querySelectorAll('.eachDieClass');
 
@@ -90,20 +87,15 @@ window.addEventListener('DOMContentLoaded', function() {
     
 
     
-    
-    
-
-
     function genDie() {
-        createDie();
         countMaxLimit = 5;
+        die();
         reRollDieListeners(button2);
         
 
-        
         function stopDieRoll() {
             if (count = countMaxLimit) {
-            document.getElementById('genDieBtn').disabled = 'disabled';
+                button1.disabled = true;
             }
         };
 
@@ -116,38 +108,99 @@ window.addEventListener('DOMContentLoaded', function() {
         document.getElementById('eachDie').addEventListener('dblclick', function() {
             dblClicked();
         });
+
         
+
     };
     
+    let button1 = document.getElementById('genDieBtn');
+
+    function genDieArrayPush() {
+            button1.addEventListener('click', function() {
+            for (let i = 0; i < 5; i++) {
+                dieArray.push(genDie());
+            }
+            
+            return dieArray;
+        });
+    };
+
+    genDieArrayPush();
 
 
-    document.getElementById('genDieBtn').addEventListener('click', function() {
-        for (let i = 0; i < 5; i++) {
-            dieArray.push(genDie());
-        }
-        return dieArray;
-        
-    });
-
+    
     
     let button2 = document.getElementById('reRollDie');
     
 
     function reRollDieListeners(button2) {
-        button2.addEventListener('click', function() {
-            
-        createDie();
         
+        
+        button2.addEventListener('click', function() {
+            div.removeChild(div.firstChild);
         });
 
+        button2.addEventListener('click', function() {
+            die();
+            
+        });
     };
 
-    document.getElementById('sumDie').addEventListener('click', function() {
-        let sum = dieArray.reduce(function(a, b) {
-            return a + b + dieArray.die;
+    let button3 = document.getElementById('sumDie');
+    
+
+    button3.addEventListener('click', function() {
+        div.removeChild(div.firstChild);
+        
+        let sumCount = Math.floor((Math.random() * 10) + 1);
+
+        let sumSquare = document.createElement('div');
+        let sumSquareText = document.createTextNode(sumCount);
+        div.className = 'sumDieTotal';
+        let sumSquare1 = document.getElementsByClassName('sumDieTotal');
+        sumSquare.class = sumSquare1;
+        sumSquare.id = sumCount;
+        
+        
+
+        sumSquare.appendChild(sumSquareText);
+        div.appendChild(sumSquare);
+        sumSquare.style.height = '50px';
+        sumSquare.style.width = '50px';
+        sumSquare.style.border = '2px solid black';
+        sumSquare.style.borderRadius = '8px';
+        sumSquare.style.margin = '25px 10px 15px';
+        sumSquare.style.cssFloat = 'left';
+        sumSquare.style.fontSize = '30px';
+        sumSquare.style.verticalAlign = 'middle';
+        sumSquare.style.lineHeight = '1.5';
+
+        
+        
+        sumSquare.textContent = sumCount;
+
+        let sumAllDie = document.querySelectorAll('.sumDieTotal');
+
+        let num = [];
+
+        
+
+        num.forEach.call(sumAllDie, function(e) {
+            num.push(Number(e.textContent));
+        });
+        sum = num.reduce(function(a, sumAllDie){
+            return a += sumAllDie;
         }, 0);
         alert('Total Die:' + sum);
+
+    
+
     });
+
+        
+
+        
+
     
     
 
