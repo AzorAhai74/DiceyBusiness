@@ -15,22 +15,23 @@ window.addEventListener('DOMContentLoaded', function() {
 	div.style.boxShadow = '10px 10px grey';
     
     
+   
+    
     class Die {
         constructor() {
             
             this.divSquare = document.createElement('div');
-            this.className = 'genDie';
-            this.divSquare1 = document.getElementsByClassName('genDie');
-            this.divSquare.className = 'eachDie';
+            this.divSquare.className = 'dieSquares';
+            this.divSquare1 = document.getElementsByClassName('dieSquares'); 
+            this.divSquare.class = this.divSquare1;
+            this.divSquare.id = 'eachDieId';
             this.value = 0;
             this.dieRoll();
-            this.dieRemove();
-            this.dieEvents();
-            this.dieElements();
-            this.dieBtnEvents();
-            this.dieSumFormula();
+        
+            
             
             div.appendChild(this.divSquare);
+            this.divSquare.classList.add('dieSquares');
             this.divSquare.style.height = '50px';
             this.divSquare.style.width = '50px';
             this.divSquare.style.border = '2px solid black';
@@ -40,89 +41,72 @@ window.addEventListener('DOMContentLoaded', function() {
             this.divSquare.style.fontSize = '30px';
             this.divSquare.style.verticalAlign = 'middle';
             this.divSquare.style.lineHeight = '1.5';
+            this.indexNum = dieArray.length;
+            this.divSquare.addEventListener('dblclick', () => {
+                this.removeDie();
+            })
+            this.divSquare.addEventListener('click', () => {
+                this.dieRoll();
+            });
 
             
         };
-
-        
-
-        dieEvents() {
-            this.divSquare.addEventListener('click', () => this.dieRoll(), this.dieSumFormula());
-            this.divSquare.addEventListener('dblclick', () => this.dieRemove(), this.dieSumFormula());
-        };
-
-        
-        dieElements() {
-            this.button1 = document.getElementById('genDieBtn');
-            this.button2 = document.getElementById('reRollDie');
-            this.button3 = document.getElementById('sumDie');
-        };
-        
 
         dieRoll() {
             this.value = Math.floor((Math.random() * 6) + 1);
             this.divSquare.textContent = this.value;
         };
 
-        
-        dieRemove() {
+
+        removeDie() {
             this.divSquare.outerHTML = '';
-            dieArray = dieArray.filter(eachDie => eachDie.indexNum != this.indexNum);
+            dieArray = dieArray.filter(dieSquares => dieSquares.indexNum !== this.indexNum);
         };
-            
+        
 
-        dieSumFormula = (e) => {
-            let sum = 0;
-            dieArray.forEach(die => sum += die.value);
-            e.target.textContent = sum;
-        };
-
-        dieBtnEvents = () => {
-            button1 = () => {
-                this.button1.addEventListener('click', () => {
-                let dice = new Die();
-                dieArray.push(dice);
-                dieSumFormula();
-                });
-            };
-            button2 = () => {
-                this.button2.addEventListener('click', () => {
-                    dieArray.forEach(die => die.dieRoll());
-                    dieSumFormula();
-                });
-            };
-            button3 = () => {
-                this.button3.addEventListener('click', () => {
-                dieArray.forEach(die => die.dieRoll());
-                alert('Total Die:' + dieSumFormula());
-                });
-            };
-
-
-        };
-            
-            
-
+        
+       
     };
 
+    
+    
 
+
+    dieSumFormula = () => {
+        let sum = 0;
+        dieArray.forEach(dieSquares => sum += dieSquares.value);
+        alert('Total Die: ' + sum);
+    };
+            
+            
     let button1 = document.getElementById('genDieBtn');
 
     button1.addEventListener('click', () => {
-        new Die();
+        let dice = new Die();
+        dieArray.push(dice);
     });
 
     let button2 = document.getElementById('reRollDie');
 
     button2.addEventListener('click', () => {
-        new Die();
+        dieArray.forEach(dieSquares => dieSquares.dieRoll());
     });
 
     let button3 = document.getElementById('sumDie');
 
+    
     button3.addEventListener('click', () => {
-        new Die();
+        removeDie = () => {
+            div.removeChild(div.firstChild);
+        };
+        dieSumFormula();
     });
+
+    
+
+    
+
+     
 
    
 
