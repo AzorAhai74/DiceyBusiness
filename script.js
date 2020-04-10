@@ -25,11 +25,10 @@ window.addEventListener('DOMContentLoaded', function() {
             this.divSquare1 = document.getElementsByClassName('dieSquares'); 
             this.divSquare.class = this.divSquare1;
             this.divSquare.id = 'eachDieId';
+            this.divSquareValue = 0;
             this.value = 0;
             this.dieRoll();
         
-            
-            
             div.appendChild(this.divSquare);
             this.divSquare.classList.add('dieSquares');
             this.divSquare.style.height = '50px';
@@ -51,6 +50,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
             
         };
+
+    
 
         dieRoll() {
             this.value = Math.floor((Math.random() * 6) + 1);
@@ -77,14 +78,37 @@ window.addEventListener('DOMContentLoaded', function() {
         dieArray.forEach(dieSquares => sum += dieSquares.value);
         alert('Total Die: ' + sum);
     };
-            
-            
-    let button1 = document.getElementById('genDieBtn');
+    
 
-    button1.addEventListener('click', () => {
+    
+            
+    document.getElementById('genDieBtn').addEventListener('click', addDie);
+
+            
+    fixedDie = () => {
         let dice = new Die();
         dieArray.push(dice);
-    });
+    };
+
+    stopDie = () => {
+        let button1 = document.getElementById('genDieBtn');
+        button1.disabled = true;
+    }
+
+    function addDie() {
+        fixedDie();
+        fixedDie();
+        fixedDie();
+        fixedDie();
+        fixedDie();
+        stopDie();
+    };
+
+    
+    
+   
+
+    
 
     let button2 = document.getElementById('reRollDie');
 
