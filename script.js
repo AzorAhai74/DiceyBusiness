@@ -26,40 +26,32 @@ window.addEventListener('DOMContentLoaded', function() {
             this.divSquare.id = 'eachDieId';
             this.value = 0;
             this.dieRoll();
-            this.genRandomBackColor();
+            
             
             div.appendChild(this.divSquare);
             this.divSquare.classList.add('dieSquares');
             this.divSquare.style.height = '50px';
             this.divSquare.style.width = '50px';
-            this.divSquare.style.border = '2px solid black';
-            this.divSquare.style.borderRadius = '8px';
             this.divSquare.style.margin = '0px 10px 0px';
             this.divSquare.style.cssFloat = 'left';
-            this.divSquare.style.fontSize = '30px';
+            this.divSquare.style.fontSize = '75px';
             this.divSquare.style.verticalAlign = 'middle';
-            this.divSquare.style.lineHeight = '1.5';
+            this.divSquare.style.lineHeight = '.5';
             this.indexNum = dieArray.length;
+            //double click on each die to remove them
             this.divSquare.addEventListener('dblclick', () => {
                 this.removeDie();
                 
             });
+            //click on each die to roll them
             this.divSquare.addEventListener('click', () => {
                 this.dieRoll();
             });
-            this.divSquare.addEventListener('mouseover', () => {
-                this.genRandomBackColor();
-            });
+            
         };
 
 
-        genRandomBackColor() {
-            let r = Math.floor(Math.random() * 256);
-            let g = Math.floor(Math.random() * 256);
-            let b = Math.floor(Math.random() * 256);
-            this.divSquare.style.backgroundColor = 
-        };
-
+        //Rolling the die will create the value of each die shown below
         dieRoll() {
             this.value = Math.floor((Math.random() * 6) + 1);
             if (this.value === 1) {
@@ -85,19 +77,17 @@ window.addEventListener('DOMContentLoaded', function() {
             
 
 
-
+        //Using the array filter method to create a new array with all the 
+        //elements to pass a test implemented by the removeDie function
         removeDie() {
             this.divSquare.outerHTML = '';
             dieArray = dieArray.filter(dieSquares => dieSquares.indexNum !== this.indexNum);
         };
 
         
-        
-        
-
     };
 
-    
+    //function to add the die for each click or roll button
     dieSumFormula = sum => {
         dieArray.forEach(dieSquares => sum += dieSquares.value);
         return sum = 0;
@@ -107,19 +97,19 @@ window.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById('genDieBtn').addEventListener('click', addDie);
 
-            
+    //each die roll function        
     fixedDie = () => {
         let dice = new Die();
         if (dieArray.length < 5);
         dieArray.push(dice);
     };
-
+    //after 5 die are created, the "Roll Die Homey" button is disabled to keep only five die on the screen
     stopDie = () => {
         let button1 = document.getElementById('genDieBtn');
         if (dieArray.length < 9) 
         button1.disabled = true;
         };
-
+    //function that adds each die when the "Roll Die Homey" button is pressed
     function addDie() {
         fixedDie();
         fixedDie();
@@ -129,9 +119,10 @@ window.addEventListener('DOMContentLoaded', function() {
         stopDie();
     };
 
-    
+    //The "ReRoll Da Die" button re-rolls the die that are on the screen 
+    //and adds a die if there are less than five of them
     let button2 = document.getElementById('reRollDie');
-
+    
     button2.addEventListener('click', () => {
         if (dieArray.length < 5) {
             fixedDie();
@@ -139,13 +130,12 @@ window.addEventListener('DOMContentLoaded', function() {
         dieArray.forEach(dieSquares => dieSquares.dieRoll());
         dieSumFormula();
     });
-
+    
+    //when the "Add Yop Die" button is pressed, whatever die 
+    //is on the screen will be calculated and shown with an alert
     document.getElementById('sumDie').addEventListener('click', addSumDie);
 
-    sumAddDie = () => {
-        let sumDice = new Die();
-        dieArray.push(sumDice);
-    };
+    
 
     function addSumDie() {
         let sum = 0;
@@ -153,11 +143,4 @@ window.addEventListener('DOMContentLoaded', function() {
         alert('Total Die: ' + sum);
     };
 
-
-
-    
-
-    
-
-     
 });
