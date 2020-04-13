@@ -1,6 +1,8 @@
 window.addEventListener('DOMContentLoaded', function() {
 
     let dieArray = [];
+
+    
     
     let div = document.createElement('div');
 	div.className = 'col shadow-lg p-4 mb-4 bg-light';
@@ -14,9 +16,6 @@ window.addEventListener('DOMContentLoaded', function() {
 	div.style.borderStyle = 'solid';
 	div.style.boxShadow = '10px 10px grey';
     
-    
-   
-    
     class Die {
         constructor() {
             
@@ -25,11 +24,10 @@ window.addEventListener('DOMContentLoaded', function() {
             this.divSquare1 = document.getElementsByClassName('dieSquares'); 
             this.divSquare.class = this.divSquare1;
             this.divSquare.id = 'eachDieId';
-            this.divSquareValue = 0;
             this.value = 0;
             this.dieRoll();
+            this.genRandomBackColor();
             
-        
             div.appendChild(this.divSquare);
             this.divSquare.classList.add('dieSquares');
             this.divSquare.style.height = '50px';
@@ -49,35 +47,57 @@ window.addEventListener('DOMContentLoaded', function() {
             this.divSquare.addEventListener('click', () => {
                 this.dieRoll();
             });
-
-            
+            this.divSquare.addEventListener('mouseover', () => {
+                this.genRandomBackColor();
+            });
         };
 
-    
+
+        genRandomBackColor() {
+            let r = Math.floor(Math.random() * 256);
+            let g = Math.floor(Math.random() * 256);
+            let b = Math.floor(Math.random() * 256);
+            this.divSquare.style.backgroundColor = 
+        };
 
         dieRoll() {
             this.value = Math.floor((Math.random() * 6) + 1);
-            this.divSquare.textContent = this.value;
+            if (this.value === 1) {
+                this.divSquare.textContent = '\u2680';
+            }
+            else if (this.value === 2) {
+                this.divSquare.textContent = '\u2681';
+            }   
+            else if (this.value === 3) {
+                this.divSquare.textContent = '\u2682';
+            }
+            else if (this.value === 4) {
+                this.divSquare.textContent = '\u2683';
+            }
+            else if (this.value === 5) {
+                this.divSquare.textContent = '\u2684';
+            }
+            else if (this.value === 6) {
+                this.divSquare.textContent = '\u2685';
+            }
+            return this.value;
         };
+            
+
 
 
         removeDie() {
             this.divSquare.outerHTML = '';
             dieArray = dieArray.filter(dieSquares => dieSquares.indexNum !== this.indexNum);
         };
-        
-        recalculateDie() {
-
-        }
 
         
-       
+        
+        
+
     };
 
     
-    
-
-
     dieSumFormula = sum => {
         dieArray.forEach(dieSquares => sum += dieSquares.value);
         return sum = 0;
@@ -85,7 +105,6 @@ window.addEventListener('DOMContentLoaded', function() {
     
 
     
-            
     document.getElementById('genDieBtn').addEventListener('click', addDie);
 
             
@@ -121,9 +140,6 @@ window.addEventListener('DOMContentLoaded', function() {
         dieSumFormula();
     });
 
-
-
-    
     document.getElementById('sumDie').addEventListener('click', addSumDie);
 
     sumAddDie = () => {
@@ -131,29 +147,17 @@ window.addEventListener('DOMContentLoaded', function() {
         dieArray.push(sumDice);
     };
 
-    
-
-   
-    
     function addSumDie() {
         let sum = 0;
         dieArray.forEach(dieSquares => sum += dieSquares.value);
         alert('Total Die: ' + sum);
-        
-
     };
-    
-    
+
+
 
     
 
     
 
      
-
-   
-
-
-            
-           
 });
